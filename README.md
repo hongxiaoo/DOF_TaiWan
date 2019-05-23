@@ -10,10 +10,10 @@
 >物品
 ## Quest
 >任务
-## Map
->地图
-## Dungeon
->副本
+## Town
+>城镇
+## Map/Dungeon
+>地图/副本
 ## Monster
 >怪物
 ## Apc
