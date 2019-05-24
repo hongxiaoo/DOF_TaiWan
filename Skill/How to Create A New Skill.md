@@ -2,7 +2,7 @@
 
 - **Skill**
     - >.skl : 技能信息以及相关数值文件
-    - >skill.lst : 技能列表
+    - >.lst : 技能列表
     - >.nut : 技能脚本文件
     - >.co : 技能树
 - **Charactar**
