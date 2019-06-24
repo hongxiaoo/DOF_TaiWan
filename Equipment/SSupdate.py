@@ -16,13 +16,13 @@ def change_equinfo(file_path):
         if 'need material' in old_content:
             content_durability = re.sub(r'''\[need material\]
 	.*	.*''', r'''[need material]
-    3284	100''', old_content, re.S)
+    3284	50''', old_content, re.S)
             with open(file_path,'w+', encoding='utf-8') as f:
                 f.write(content_durability)
         else:
             with open(file_path,'a+', encoding='utf-8') as f:
                 f.write(r'''[need material]
-    3284	100''')
+    3284	50''')
     except:
         print(file_path+'\tFailed')
 
