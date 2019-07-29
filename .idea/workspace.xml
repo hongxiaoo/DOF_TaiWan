@@ -63,12 +63,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="346" />
-    <option name="y" value="46" />
-    <option name="width" value="1396" />
-    <option name="height" value="958" />
-  </component>
+  <component name="ProjectId" id="1OhGQpzhrYfHcvgM1hTy8uapC8c" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -99,6 +94,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/Equipment" />
@@ -313,19 +309,19 @@
     <option name="version" value="1" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/DNFTools$DNFedition.coverage" NAME="DNFedition Coverage Results" MODIFIED="1561148133659" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/DNFTools$Delete_qst.coverage" NAME="Delete_qst Coverage Results" MODIFIED="1561198500221" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/DNFTools$Delete_Map.coverage" NAME="Delete_Map Coverage Results" MODIFIED="1561197962889" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/DNFTools$addtitle.coverage" NAME="addtitle Coverage Results" MODIFIED="1561097744825" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/DNFTools$add_equ_dict.coverage" NAME="add_equ_dict Coverage Results" MODIFIED="1560954291731" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Equipment" />
-    <SUITE FILE_PATH="coverage/DNFTools$addssequ.coverage" NAME="addssequ Coverage Results" MODIFIED="1561097408151" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Equipment" />
-    <SUITE FILE_PATH="coverage/DNFTools$equ_dict_info.coverage" NAME="equ_dict_info Coverage Results" MODIFIED="1560954395742" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/DNFTools$Delete_Equ_NOT_IN_SHOP.coverage" NAME="Delete_Equ_NOT_IN_SHOP Coverage Results" MODIFIED="1561268112929" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Equipment" />
     <SUITE FILE_PATH="coverage/DNFTools$Delete_item.coverage" NAME="Delete_item Coverage Results" MODIFIED="1561197134231" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Stackable" />
+    <SUITE FILE_PATH="coverage/DNFTools$Delete_Equ_NOT_IN_SHOP.coverage" NAME="Delete_Equ_NOT_IN_SHOP Coverage Results" MODIFIED="1561268112929" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Equipment" />
+    <SUITE FILE_PATH="coverage/DNFTools$readNPKfile.coverage" NAME="readNPKfile Coverage Results" MODIFIED="1561520404115" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NPK" />
+    <SUITE FILE_PATH="coverage/DNFTools$DNFedition.coverage" NAME="DNFedition Coverage Results" MODIFIED="1561148133659" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/DNFTools$Delete_equ.coverage" NAME="Delete_equ Coverage Results" MODIFIED="1561195334149" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Equipment" />
+    <SUITE FILE_PATH="coverage/DNFTools$equ_dict_info.coverage" NAME="equ_dict_info Coverage Results" MODIFIED="1560954395742" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/DNFTools$Delete_qst.coverage" NAME="Delete_qst Coverage Results" MODIFIED="1561198500221" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/DNFTools$add_equ_dict.coverage" NAME="add_equ_dict Coverage Results" MODIFIED="1560954291731" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Equipment" />
+    <SUITE FILE_PATH="coverage/DNFTools$addtitle.coverage" NAME="addtitle Coverage Results" MODIFIED="1561097744825" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/DNFTools$Delete_dgn.coverage" NAME="Delete_dgn Coverage Results" MODIFIED="1561198266101" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/DNFTools$SSupdate.coverage" NAME="SSupdate Coverage Results" MODIFIED="1561099755813" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Equipment" />
-    <SUITE FILE_PATH="coverage/DNFTools$readNPKfile.coverage" NAME="readNPKfile Coverage Results" MODIFIED="1561520404115" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NPK" />
-    <SUITE FILE_PATH="coverage/DNFTools$Delete_equ.coverage" NAME="Delete_equ Coverage Results" MODIFIED="1561195334149" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Equipment" />
+    <SUITE FILE_PATH="coverage/DNFTools$addssequ.coverage" NAME="addssequ Coverage Results" MODIFIED="1561097408151" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Equipment" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Equipment/equ_group_dict.pkl">
