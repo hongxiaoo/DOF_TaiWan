@@ -10,6 +10,18 @@ img_name_mask = b"puchikon@neople dungeon and fighter " \
                 b"DNFDNFDNFDNFDNFDNFDNFDNF\x00"
 
 
+def list_all_files(rootdir):
+    _files = []
+    list = os.listdir(rootdir) #列出文件夹下所有的目录与文件
+    for i in range(0,len(list)):
+        path = os.path.join(rootdir,list[i])
+        if os.path.isdir(path):
+            _files.extend(list_all_files(path))
+        if os.path.isfile(path):
+            _files.append(path)
+    return _files
+
+
 def int2Bytes(intNum):
     '''
     将img数量转化为npk文件中的2进制内容。
@@ -100,6 +112,6 @@ def encodeName(name_content):
     return img_name
 
 
-def isExit(filePath):
+def isExitPath(filePath):
     if not os.path.exists(filePath):
         os.makedirs(filePath)
