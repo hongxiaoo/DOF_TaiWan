@@ -2,30 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d935dd0-668f-4716-bf80-7b7dd55a0155" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/MediaSourceTools/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/DNFTools.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/DNFTools.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NPK/readNPKfile.py" beforeDir="false" afterPath="$PROJECT_DIR$/NPK/readNPKfile.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MediaSourceTools/NPK.py" beforeDir="false" afterPath="$PROJECT_DIR$/MediaSourceTools/NPK.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MediaSourceTools/NkpImgTools.py" beforeDir="false" afterPath="$PROJECT_DIR$/MediaSourceTools/NkpImgTools.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MediaSourceTools/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/MediaSourceTools/main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/NPK/readNPKfile.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="8" column="14" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -43,55 +31,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/Equipment/add_equ_dict.py" />
-        <option value="$PROJECT_DIR$/equ_dict_info.py" />
-        <option value="$PROJECT_DIR$/(r)itemdictionary.etc" />
-        <option value="$PROJECT_DIR$/Equipment/addssequ.py" />
-        <option value="$PROJECT_DIR$/addtitle.py" />
-        <option value="$PROJECT_DIR$/Equipment/SSupdate.py" />
-        <option value="$PROJECT_DIR$/DNFedition.py" />
-        <option value="$PROJECT_DIR$/Equipment/Delete_equ.py" />
-        <option value="$PROJECT_DIR$/Stackable/Delete_item.py" />
-        <option value="$PROJECT_DIR$/Delete_Map.py" />
-        <option value="$PROJECT_DIR$/Delete_dgn.py" />
-        <option value="$PROJECT_DIR$/Delete_qst.py" />
-        <option value="$PROJECT_DIR$/Equipment/Delete_Equ_NOT_IN_SHOP.py" />
-        <option value="$PROJECT_DIR$/NPK/readNPKfile.py" />
-      </list>
-    </option>
-  </component>
   <component name="ProjectId" id="1OhGQpzhrYfHcvgM1hTy8uapC8c" />
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="DNFTools" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DNFTools" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DNFTools" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DNFTools" type="462c0819:PsiDirectoryNode" />
-              <item name="NPK" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DNFTools" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DNFTools" type="462c0819:PsiDirectoryNode" />
-              <item name="Skill" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-    </panes>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
@@ -125,7 +67,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.readNPKfile">
+  <component name="RunManager" selected="Python.NPK">
     <configuration name="Delete_Equ_NOT_IN_SHOP" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="DNFTools" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -140,28 +82,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Equipment/Delete_Equ_NOT_IN_SHOP.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Delete_Map" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="DNFTools" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Delete_Map.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -214,6 +134,28 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="NPK" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="DNFTools" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/MediaSourceTools" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/MediaSourceTools/NPK.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="readNPKfile" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="DNFTools" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -238,11 +180,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.NPK" />
         <item itemvalue="Python.readNPKfile" />
         <item itemvalue="Python.Delete_Equ_NOT_IN_SHOP" />
         <item itemvalue="Python.Delete_qst" />
         <item itemvalue="Python.Delete_dgn" />
-        <item itemvalue="Python.Delete_Map" />
       </list>
     </recent_temporary>
   </component>
@@ -273,40 +215,26 @@
       <workItem from="1561520221275" duration="802000" />
       <workItem from="1561521874877" duration="764000" />
       <workItem from="1561542587152" duration="382000" />
+      <workItem from="1564422402678" duration="1281000" />
     </task>
     <servers />
   </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30220000" />
-  </component>
-  <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15671642" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3288835" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.329718" />
-      <window_info anchor="bottom" id="Python Console" order="12" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" />
-      <window_info anchor="right" id="Database" order="4" />
-    </layout>
-  </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/DNFTools$Delete_Map.coverage" NAME="Delete_Map Coverage Results" MODIFIED="1561197962889" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -320,65 +248,8 @@
     <SUITE FILE_PATH="coverage/DNFTools$add_equ_dict.coverage" NAME="add_equ_dict Coverage Results" MODIFIED="1560954291731" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Equipment" />
     <SUITE FILE_PATH="coverage/DNFTools$addtitle.coverage" NAME="addtitle Coverage Results" MODIFIED="1561097744825" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/DNFTools$Delete_dgn.coverage" NAME="Delete_dgn Coverage Results" MODIFIED="1561198266101" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/DOF_TaiWan$NPK.coverage" NAME="NPK Coverage Results" MODIFIED="1564423440427" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/MediaSourceTools" />
     <SUITE FILE_PATH="coverage/DNFTools$SSupdate.coverage" NAME="SSupdate Coverage Results" MODIFIED="1561099755813" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Equipment" />
     <SUITE FILE_PATH="coverage/DNFTools$addssequ.coverage" NAME="addssequ Coverage Results" MODIFIED="1561097408151" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Equipment" />
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Equipment/equ_group_dict.pkl">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Equipment/delete_oldequ.py" />
-    <entry file="file://$PROJECT_DIR$/Equipment/addtitle.py" />
-    <entry file="file://$PROJECT_DIR$/Stackable/Delete_item.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="23" column="19" selection-end-line="23" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Delete_qst.py" />
-    <entry file="file://$PROJECT_DIR$/Delete_dgn.py" />
-    <entry file="file://$PROJECT_DIR$/Delete_Map.py" />
-    <entry file="file://$PROJECT_DIR$/Equipment/Delete_equ.py" />
-    <entry file="file://$PROJECT_DIR$/Equipment/add_equ_dict.py" />
-    <entry file="file://$PROJECT_DIR$/Equipment/SSupdate.py" />
-    <entry file="file://$PROJECT_DIR$/Equipment/Delete_Equ_NOT_IN_SHOP.py" />
-    <entry file="file://$PROJECT_DIR$/Equipment/equ_dict_info.py" />
-    <entry file="file://$PROJECT_DIR$/DNFedition.py" />
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor />
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Equipment/NPK_IMG.py" />
-    <entry file="file://$PROJECT_DIR$/Equipment/装备属性.md" />
-    <entry file="file://$PROJECT_DIR$/(r)itemdictionary.etc" />
-    <entry file="file://$PROJECT_DIR$/Equipment/addssequ.py" />
-    <entry file="file://$PROJECT_DIR$/Skill/How to Create A New Skill.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="-60">
-            <caret line="7" column="9" lean-forward="true" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NPK/readNPKfile.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="8" column="14" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
   </component>
 </project>
