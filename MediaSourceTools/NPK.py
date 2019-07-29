@@ -1,3 +1,6 @@
+'''
+NPK文件操作类模块
+'''
 from NkpImgTools import *
 
 

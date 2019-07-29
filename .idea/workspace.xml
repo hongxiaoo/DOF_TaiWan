@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d935dd0-668f-4716-bf80-7b7dd55a0155" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/MediaSourceTools/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/DNFTools.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/DNFTools.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MediaSourceTools/PNG.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MediaSourceTools/IMG.py" beforeDir="false" afterPath="$PROJECT_DIR$/MediaSourceTools/IMG.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MediaSourceTools/NPK.py" beforeDir="false" afterPath="$PROJECT_DIR$/MediaSourceTools/NPK.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MediaSourceTools/NkpImgTools.py" beforeDir="false" afterPath="$PROJECT_DIR$/MediaSourceTools/NkpImgTools.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MediaSourceTools/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/MediaSourceTools/main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -215,7 +212,7 @@
       <workItem from="1561520221275" duration="802000" />
       <workItem from="1561521874877" duration="764000" />
       <workItem from="1561542587152" duration="382000" />
-      <workItem from="1564422402678" duration="1281000" />
+      <workItem from="1564422402678" duration="1725000" />
     </task>
     <servers />
   </component>
