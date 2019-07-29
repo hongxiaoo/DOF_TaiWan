@@ -12,8 +12,8 @@ class Npk(object):
         # data2 :img索引表，列表形式
         # data3 :校验码SHA256
         # data4 :img内容
-        self._readObj
-        self._imgAnalyse
+        [self.header, self.data1, self.data2, self.data3, self.data4, self.img_count] = self._readObj()
+        self.imgAnalyse = self._imgAnalyse()
 
     @property
     def _data2Content(self):
@@ -28,7 +28,6 @@ class Npk(object):
         self.dataContents = self.header + self.data1 + self._data2Content + self.data3 + self.data4
         return self.dataContents
 
-    @property
     def _readObj(self):
         with open(self.filePath, 'rb') as content:
             # 分割npk文件流
@@ -43,9 +42,8 @@ class Npk(object):
             self.data3 = content.read(32)
             # data4为img文件内容的列表
             self.data4 = content.read()
-        return self.header, self.data1, self.data2, self.data3, self.data4, self.img_count
+        return [self.header, self.data1, self.data2, self.data3, self.data4, self.img_count]
 
-    @property
     def _imgAnalyse(self):
         '''
         根据imgIndex索引表内容返回分析的img内容
@@ -257,12 +255,18 @@ class Npk(object):
             imgFile.write(imgContent)
 
     def _getSavePath(self, imgIndex = 0):
+        '''
+        获取提取Img的文件夹路径
+        :param imgIndex: 提取的img编号，默认为0，方便进行批量提取
+        :return: 文件夹路径
+        '''
         filePath = ''
         for path in self.filePath.split('\\')[:-1]:
             filePath += path + '\\'
         for path in self.imgAnalyse[imgIndex][-1].replace('/', '\\').split('\\')[:-1]:
             filePath += path + '\\'
-        isExit(filePath)
+        # 文件是否存在，不存在则创建
+        isExitPath(filePath)
         return filePath
 
     def _updateSHA(self):
@@ -271,4 +275,18 @@ class Npk(object):
         :return: 新SHA256值
         '''
         return shaDecode(self.header + self.data1 + self._data2Content)
+
+
+if __name__ == '__main__':
+    for file in list_all_files('D:\\UserData\\Desktop\\test'):
+        if '.NPK' in file:
+            npkObj = Npk(file)
+            print(npkObj.name, "Img数量为：", npkObj.img_count)
+            # npkObj._renameImg(0)
+            # npkObj._delImg(0)
+            # npkObj._addImg('D:\\UserData\\Desktop\\test\\testimg.img')
+            # npkObj._saveObj()
+            # npkObj._listAll()
+            npkObj._dropImg(-1, dropAll=False)
+            break
 
