@@ -3,19 +3,18 @@ IMG文件操作类模块
 '''
 from NkpImgTools import *
 import zlib
-from PIL import Image
-
+from PNG import *
 v2IndexType = [bytes2int(b'\x10'), bytes2int(b'\x0f'), bytes2int(b'\x0e')]
 
 
-class Img():
+class Img(object):
 
     def __init__(self, filePath):
         self.filePath = filePath
         self._readImg()
 
     def _readImg(self):
-        with open(self.filePath , 'rb') as imgFile:
+        with open(self.filePath, 'rb') as imgFile:
             self.header = imgFile.read(16)
             # 获取索引表大小
             self.indexSize = bytes2int(imgFile.read(4))
@@ -33,10 +32,10 @@ class Img():
             # 版本不同，以下读取内容不同
             indexContent = imgFile.read(self.indexSize)
             self.indexContents = self._v2ImgIndexContentSplit(indexContent)
-            self.indexAnas = self._v2ImgIndexContentAnas()
+            self.indexAnas = self._v2ImgPicAnas()
             # 剩余字节流为贴图数据
             self.picContents = imgFile.read()
-            # self._v2ImgPicContentSplit()
+            self._v2ImgPicContentSplit()
         if edition == 4:
             pass
 
@@ -63,8 +62,8 @@ class Img():
                     typeFlagAddress += 36
         return self.indexContents
 
-    # 获取索引内容分析
-    def _v2ImgIndexContentAnas(self):
+    # 获取图片内容分析
+    def _v2ImgPicAnas(self):
         '''
         对v2格式的img文件索引内容进行分析
         :return: 返回一个img索引序号做key，分析内容为值的字典
@@ -91,20 +90,20 @@ class Img():
                 frameWidth = bytes2int(indexContent[28:32])
                 # 帧域高
                 frameHeight = bytes2int(indexContent[32:-1])
-                indexAnas[index] = [colorSystem, zlibState, picWidth, picHeight, picSize, posX, posY, frameWidth, frameHeight]
+                indexAnas[index] = [colorSystem, zlibState, picWidth, picHeight, picSize,
+                                    posX, posY, frameWidth, frameHeight]
             elif len(indexContent) == 2:
                 picPoint = indexContent[-1]
                 indexAnas[index] = picPoint
         return indexAnas
 
-    # 获取图片内容的分割与分析
+    # 获取图片内容
     def _v2ImgPicContentSplit(self):
         '''
-        将图片资源分析分割
+        将图片资源分析分割,并加入到对应的PNG分析
         :return:
         '''
         # 设定一个index序号和分割到的pic文件流的字典
-        picContentsIndex = {}
         # 设定分割起点
         picSplitStartP = 0
         for index in range(self.indexCount):
@@ -112,34 +111,26 @@ class Img():
                 picSize = self.indexAnas[index][4]
                 # 分割部分大小为 picSize 分割起点设置为0，并每次分割，增加picSize
                 picContent = self.picContents[picSplitStartP: picSplitStartP + picSize]
+                # 解压缩zlib格式
                 if self.indexAnas[index][1] == 6:
-                    picContentsIndex[index] = self._v2ImgPicZlibDecom(picContent)
+                    self.indexAnas[index].append(zlib.decompress(picContent))
                 else:
-                    picContentsIndex[index] = picContent
+                    self.indexAnas[index].append(picContent)
                 picSplitStartP += picSize
             else:
                 # 如果不是图片索引则跳过
                 continue
+        return True
 
-    # 解压缩zlib图片资源
-    def _v2ImgPicZlibDecom(self, picContent):
-        '''
-        解压图片资源
-        :param picContent:压缩后的图片资源
-        :return:解压后的图片资源
-        '''
-        # print(picContent)
-        decomPicC = zlib.decompress(picContent)
-        print(decomPicC)
-        return decomPicC
+    #v4格式img文件的操作方法
 
 
 if __name__ == "__main__":
-    a = Img('D:\\UserData\\Desktop\\test\\v2.img')
-    # print("edition:\t", a.imgEdition, '\nindexSize:\t', a.indexSize, '\nindexCount:\t', a.indexCount)
-    # for index in range(a.indexCount):
-    #     print(index, a.indexAnas[index])
-    # a._v2ImgPicContentSplit()
+    a = Img('D:\\UserData\\Desktop\\test\\sprite_map_npc_6thcake_base.img')
+    # print(a.indexAnas[0][-1])
+    img = Png()
+    img._pngAna(a.indexAnas[0])
+    img._saveImgPng()
 
 
 

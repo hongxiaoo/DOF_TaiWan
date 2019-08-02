@@ -2,7 +2,7 @@
 NPK文件操作类模块
 '''
 from NkpImgTools import *
-
+from PNG import *
 
 class Npk(object):
 
@@ -15,7 +15,7 @@ class Npk(object):
         # data2 :img索引表，列表形式
         # data3 :校验码SHA256
         # data4 :img内容
-        [self.header, self.data1, self.data2, self.data3, self.data4, self.img_count] = self._readObj()
+        [self.header, self.data1, self.data2, self.data3, self.data4, self.img_count] = self._read()
         self.imgAnalyse = self._imgAnalyse()
 
     @property
@@ -31,7 +31,7 @@ class Npk(object):
         self.dataContents = self.header + self.data1 + self._data2Content + self.data3 + self.data4
         return self.dataContents
 
-    def _readObj(self):
+    def _read(self):
         with open(self.filePath, 'rb') as content:
             # 分割npk文件流
             self.header = content.read(16)
@@ -47,6 +47,27 @@ class Npk(object):
             self.data4 = content.read()
         return [self.header, self.data1, self.data2, self.data3, self.data4, self.img_count]
 
+    def _saveNpk(self, flagIndex = True):
+        '''
+        保存NPK文件
+        :param flagIndex: 是否备份保存，True保存一个name - bak.npk的文件。
+        False覆盖保存
+        :return: 返回保存状态
+        '''
+        self.dataContents = self._dataContents
+        try:
+            if flagIndex:
+                with open(self.filePath.replace('.NPK', '-bak.NPK'), 'wb') as newObj:
+                    newObj.write(self.dataContents)
+                return True
+            else:
+                with open(self.filePath, 'wb') as newObj:
+                    newObj.write(self.dataContents)
+                return True
+        except:
+            print("保存失败")
+            return False
+
     def _imgAnalyse(self):
         '''
         根据imgIndex索引表内容返回分析的img内容
@@ -58,18 +79,9 @@ class Npk(object):
             img_index_content = self.data2[index]
             address = img_index_content[:4]
             size = img_index_content[4:8]
-            name = encodeName(img_index_content[8:-1])
+            name = bytes2Name(img_index_content[8:-1])
             self.imgAnalyse[index] = [bytes2int(address), bytes2int(size), name]
         return self.imgAnalyse
-
-    def _saveNpk(self, flagIndex = True):
-        self.dataContents = self._dataContents
-        if flagIndex:
-            with open(self.filePath.replace('.NPK', '-bak.NPK'), 'wb') as newObj:
-                newObj.write(self.dataContents)
-        else:
-            with open(self.filePath, 'wb') as newObj:
-                newObj.write(self.dataContents)
 
     def _listAll(self):
         '''
@@ -81,6 +93,16 @@ class Npk(object):
             print(index, '\t', self.imgAnalyse[index][2], '\t')
             indexNames[index] = self.imgAnalyse[index][2]
         return indexNames
+
+    def _getImgContent(self, imgIndex):
+        contentSize = self.imgAnalyse[imgIndex][1]
+        # 提取img内容
+        date_3Len = len(self.header + self.data1 + self.data2Content + self.data3)
+        address = self.imgAnalyse[imgIndex][0]
+        # 设定提取内容的起点 imgContentSP = imgContentStartPoint
+        imgContentSP = address - date_3Len
+        imgContent = self.data4[imgContentSP:imgContentSP + contentSize]
+        return imgContent
 
     def _renameImg(self, renameIndex):
         '''
@@ -115,6 +137,29 @@ class Npk(object):
                 except:
                     print(oldName, '——修改失败——')
                     return False
+
+    def _replaceImg(self, imgObjPath, replaceImgIndex):
+        with open(imgObjPath,'rb') as imgObj:
+            imgContent = imgObj.read()
+        # 刷新dataContents
+        self.dataContents = self._dataContents
+        oldSize = self.imgAnalyse[replaceImgIndex][1]
+        newSize = len(imgContent)
+        offSet = newSize - oldSize
+        # 改变替换后的imgIndexContent后面imgIndexContent的位置偏移
+        # img索引最大值 = 总数 - 1
+        for i in range(replaceImgIndex+1, self.img_count):
+            self.data2[i] = int2Bytes(self.imgAnalyse[i][0] + offSet) + self.data2[i][4:]
+        # newImg`s size
+        bytesSize = int2Bytes(newSize)
+        # 新索引内容
+        self.data2[replaceImgIndex] = self.data2[replaceImgIndex][:4] + bytesSize + self.data2[replaceImgIndex][8:]
+        self._updateSHA()
+        # 修改data4内容
+        date_3Len = len(self.header + self.data1 + self.data2Content + self.data3)
+        address = self.imgAnalyse[replaceImgIndex][0]
+        oldImgContentS = address-date_3Len
+        self.data4 = self.data4[:oldImgContentS] + imgContent + self.data4[oldImgContentS + oldSize:]
 
     def _addImg(self, imgObjPath):
         '''
@@ -155,29 +200,6 @@ class Npk(object):
 
     def _insertImg(self, imgObjPath, insertIndex):
         pass
-
-    def _replaceImg(self, imgObjPath, replaceImgIndex):
-        with open(imgObjPath,'rb') as imgObj:
-            imgContent = imgObj.read()
-        # 刷新dataContents
-        self.dataContents = self._dataContents
-        oldSize = self.imgAnalyse[replaceImgIndex][1]
-        newSize = len(imgContent)
-        offSet = newSize - oldSize
-        # 改变替换后的imgIndexContent后面imgIndexContent的位置偏移
-        # img索引最大值 = 总数 - 1
-        for i in range(replaceImgIndex+1, self.img_count):
-            self.data2[i] = int2Bytes(self.imgAnalyse[i][0] + offSet) + self.data2[i][4:]
-        # newImg`s size
-        bytesSize = int2Bytes(newSize)
-        # 新索引内容
-        self.data2[replaceImgIndex] = self.data2[replaceImgIndex][:4] + bytesSize + self.data2[replaceImgIndex][8:]
-        self._updateSHA()
-        # 修改data4内容
-        date_3Len = len(self.header + self.data1 + self.data2Content + self.data3)
-        address = self.imgAnalyse[replaceImgIndex][0]
-        oldImgContentS = address-date_3Len
-        self.data4 = self.data4[:oldImgContentS] + imgContent + self.data4[oldImgContentS + oldSize:]
 
     def _delImg(self, delImgIndex):
         '''
@@ -244,15 +266,6 @@ class Npk(object):
                     if self._dropImg(reIndex):
                         break
 
-    def _getImgContent(self, imgIndex):
-        dropSize = self.imgAnalyse[imgIndex][1]
-        # 提取img内容
-        date_3Len = len(self.header + self.data1 + self.data2Content + self.data3)
-        address = self.imgAnalyse[imgIndex][0]
-        dropImgContentSP = address - date_3Len
-        dropImgContent = self.data4[dropImgContentSP:dropImgContentSP + dropSize]
-        return dropImgContent
-
     def _saveImg(self, imgContent, imgNamePath):
         with open(imgNamePath, 'wb') as imgFile:
             imgFile.write(imgContent)
@@ -279,7 +292,7 @@ class Npk(object):
         '''
         return shaDecode(self.header + self.data1 + self._data2Content)
 
-
+# 测试代码
 if __name__ == '__main__':
     for file in list_all_files('D:\\UserData\\Desktop\\test'):
         if '.NPK' in file:

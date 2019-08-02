@@ -1,9 +1,8 @@
 from NPK import Npk
 from IMG import Img
+from NkpImgTools import *
 
 
-if __name__ == '__main__':
-    pass
 
 
 

@@ -10,6 +10,11 @@ img_name_mask = b"puchikon@neople dungeon and fighter " \
                 b"DNFDNFDNFDNFDNFDNFDNFDNF\x00"
 
 
+def isExitPath(filePath):
+    if not os.path.exists(filePath):
+        os.makedirs(filePath)
+
+
 def list_all_files(rootdir):
     _files = []
     list = os.listdir(rootdir) #列出文件夹下所有的目录与文件
@@ -41,6 +46,24 @@ def int2Bytes(intNum):
     return bytes.fromhex(end_hex_count)
 
 
+def bytes2int(bytes_content):
+    '''
+    原理是对二进制流倒序成16进制，再转换为10进制
+    :param bytes_content: 二进制流内容
+    :return: 十进制数值
+    '''
+    hex_content = ''
+    flag = len(bytes_content)
+    while flag > 0:
+        hex_str = hex(bytes_content[flag - 1]).replace('0x', '')
+        while len(hex_str) < 2:
+            hex_str = '0' + hex_str
+        hex_content += hex_str
+        flag -= 1
+    int_content = int(hex_content, 16)
+    return int_content
+
+
 def name2Bytes(img_name):
     '''
     img名字转换对应的二进制流。
@@ -64,6 +87,18 @@ def name2Bytes(img_name):
     return content_bytes
 
 
+def bytes2Name(name_content):
+    while len(name_content) < 256:
+        name_content += b'\x00'
+    img_name = ''
+    for i in range(256):
+        # 舍去名称末尾的空格
+        if name_content[i] ^ img_name_mask[i] == 0:
+            continue
+        img_name += chr(name_content[i] ^ img_name_mask[i])
+    return img_name
+
+
 def shaDecode(obj_SHA_Content):
     '''
     对npk文件校验位进行校验
@@ -82,36 +117,3 @@ def shaDecode(obj_SHA_Content):
     return content_bytes
 
 
-def bytes2int(bytes_content):
-    '''
-    原理是对二进制流倒序成16进制，再转换为10进制
-    :param bytes_content: 二进制流内容
-    :return: 十进制数值
-    '''
-    hex_content = ''
-    flag = len(bytes_content)
-    while flag > 0:
-        hex_str = hex(bytes_content[flag - 1]).replace('0x', '')
-        while len(hex_str) < 2:
-            hex_str = '0' + hex_str
-        hex_content += hex_str
-        flag -= 1
-    int_content = int(hex_content, 16)
-    return int_content
-
-
-def encodeName(name_content):
-    while len(name_content) < 256:
-        name_content += b'\x00'
-    img_name = ''
-    for i in range(256):
-        # 舍去名称末尾的空格
-        if name_content[i] ^ img_name_mask[i] == 0:
-            continue
-        img_name += chr(name_content[i] ^ img_name_mask[i])
-    return img_name
-
-
-def isExitPath(filePath):
-    if not os.path.exists(filePath):
-        os.makedirs(filePath)
