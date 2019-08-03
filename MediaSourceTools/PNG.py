@@ -29,8 +29,8 @@ class Png(object):
             k = 0
             for i in range(self.width):
                 for j in range(self.height):
-                    imgPng.putpixel((i, j), (self.decomPicC[3 + 4 * k], self.decomPicC[2 + 4 * k],
-                                           self.decomPicC[1 + 4 * k], self.decomPicC[0 + 4 * k]))
+                    imgPng.putpixel((i, j), (self.decomPicC[0 + 4 * k], self.decomPicC[1 + 4 * k],
+                                           self.decomPicC[2 + 4 * k], self.decomPicC[3 + 4 * k]))
                     k += 1
         imgPng.save('test.png')
         imgPng.show()
@@ -39,9 +39,26 @@ class Png(object):
 if __name__ == '__main__':
 
     image = Image.open('D:\\UserData\\Desktop\\test\\0.png', 'r')
-    # print(image.size, image.format, image.mode)
+    print(image.size, image.format, image.mode)
+    image.show()
     # img = Image.new('RGBA', (28, 28))
     # img.show()
+    # a = []
+    # for i in range(image.size[0]):
+    #     for j in range(image.size[1]):
+    #         a.append(image.getpixel((i, j)))
+    # pixelindex = 0
+    # image2 = Image.new('RGBA', (164, 202))
+    # for i in range(image.size[0]):
+    #     for j in range(image.size[1]):
+    #         image2.putpixel((i, j), (a[pixelindex][0], a[pixelindex][1], a[pixelindex][2], a[pixelindex][3]))
+    #         if image.getpixel((i, j)) != image2.getpixel((i, j)):
+    #             print(image.getpixel((i, j)))
+    #             print(image2.getpixel((i, j)))
+    #         pixelindex += 1
+    # image2.save('test.png')
+
+
 
 
 

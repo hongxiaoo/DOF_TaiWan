@@ -4,6 +4,7 @@ IMG文件操作类模块
 from NkpImgTools import *
 import zlib
 from PNG import *
+
 v2IndexType = [bytes2int(b'\x10'), bytes2int(b'\x0f'), bytes2int(b'\x0e')]
 
 
@@ -122,15 +123,32 @@ class Img(object):
                 continue
         return True
 
-    #v4格式img文件的操作方法
+    # v4格式img文件的操作方法
 
 
 if __name__ == "__main__":
-    a = Img('D:\\UserData\\Desktop\\test\\sprite_map_npc_6thcake_base.img')
-    # print(a.indexAnas[0][-1])
-    img = Png()
-    img._pngAna(a.indexAnas[0])
-    img._saveImgPng()
+    a = Img('D:\\UserData\\Desktop\\test\\v28888.img')
+    image = Image.open('D:\\UserData\\Desktop\\test\\0.png', 'r')
+    width = a.indexAnas[0][-1][2]
+    height = a.indexAnas[0][-1][3]
+    print(image.size[0], image.size[1])
+    relist = a.indexAnas[0][-1][::-1]
+    rgbaPixel = []
+    for i in range(int(len(relist) / 4)):
+        A = relist[4 * i]
+        R = relist[1 + 4 * i]
+        G = relist[2 + 4 * i]
+        B = relist[3 + 4 * i]
+        rgbaPixel.append((R, G, B, A))
+    k = 0
+    for i in range(image.size[0]):
+        for j in range(image.size[1]):
+            print('1', k, image.getpixel((i, j)))
+            print('2', k, rgbaPixel[k])
+            k += 1
+
+
+
 
 
 

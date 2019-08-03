@@ -2,13 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d935dd0-668f-4716-bf80-7b7dd55a0155" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/MediaSourceTools/ui.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MediaSourceTools/IMG.py" beforeDir="false" afterPath="$PROJECT_DIR$/MediaSourceTools/IMG.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MediaSourceTools/NPK.py" beforeDir="false" afterPath="$PROJECT_DIR$/MediaSourceTools/NPK.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MediaSourceTools/NkpImgTools.py" beforeDir="false" afterPath="$PROJECT_DIR$/MediaSourceTools/NkpImgTools.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MediaSourceTools/PNG.py" beforeDir="false" afterPath="$PROJECT_DIR$/MediaSourceTools/PNG.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MediaSourceTools/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/MediaSourceTools/main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -179,10 +175,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.IMG" />
+        <item itemvalue="Python.Delete_Equ_NOT_IN_SHOP" />
         <item itemvalue="Python.PNG" />
         <item itemvalue="Python.ui" />
         <item itemvalue="Python.main" />
-        <item itemvalue="Python.Delete_Equ_NOT_IN_SHOP" />
       </list>
     </recent_temporary>
   </component>
@@ -221,6 +217,10 @@
       <workItem from="1564679426468" duration="7031000" />
       <workItem from="1564725065955" duration="7074000" />
       <workItem from="1564751357623" duration="40000" />
+      <workItem from="1564751552859" duration="213000" />
+      <workItem from="1564789680548" duration="2414000" />
+      <workItem from="1564794494610" duration="610000" />
+      <workItem from="1564833167532" duration="3904000" />
     </task>
     <servers />
   </component>
@@ -244,20 +244,20 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/DOF_TaiWan$PNG.coverage" NAME="PNG Coverage Results" MODIFIED="1564726799395" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/MediaSourceTools" />
+    <SUITE FILE_PATH="coverage/DOF_TaiWan$PNG.coverage" NAME="PNG Coverage Results" MODIFIED="1564790693272" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/MediaSourceTools" />
     <SUITE FILE_PATH="coverage/DNFTools$Delete_Map.coverage" NAME="Delete_Map Coverage Results" MODIFIED="1561197962889" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/DNFTools$Delete_item.coverage" NAME="Delete_item Coverage Results" MODIFIED="1561197134231" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Stackable" />
     <SUITE FILE_PATH="coverage/DNFTools$Delete_Equ_NOT_IN_SHOP.coverage" NAME="Delete_Equ_NOT_IN_SHOP Coverage Results" MODIFIED="1561268112929" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Equipment" />
     <SUITE FILE_PATH="coverage/DNFTools$readNPKfile.coverage" NAME="readNPKfile Coverage Results" MODIFIED="1561520404115" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NPK" />
     <SUITE FILE_PATH="coverage/DNFTools$DNFedition.coverage" NAME="DNFedition Coverage Results" MODIFIED="1561148133659" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/DOF_TaiWan$ui.coverage" NAME="ui Coverage Results" MODIFIED="1564514171440" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/MediaSourceTools" />
-    <SUITE FILE_PATH="coverage/DOF_TaiWan$IMG.coverage" NAME="IMG Coverage Results" MODIFIED="1564732741961" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/MediaSourceTools" />
+    <SUITE FILE_PATH="coverage/DOF_TaiWan$IMG.coverage" NAME="IMG Coverage Results" MODIFIED="1564836211986" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/MediaSourceTools" />
     <SUITE FILE_PATH="coverage/DNFTools$Delete_equ.coverage" NAME="Delete_equ Coverage Results" MODIFIED="1561195334149" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Equipment" />
     <SUITE FILE_PATH="coverage/DNFTools$equ_dict_info.coverage" NAME="equ_dict_info Coverage Results" MODIFIED="1560954395742" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/DNFTools$Delete_qst.coverage" NAME="Delete_qst Coverage Results" MODIFIED="1561198500221" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/DNFTools$add_equ_dict.coverage" NAME="add_equ_dict Coverage Results" MODIFIED="1560954291731" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Equipment" />
     <SUITE FILE_PATH="coverage/DOF_TaiWan$main.coverage" NAME="main Coverage Results" MODIFIED="1564513039446" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/MediaSourceTools" />
-    <SUITE FILE_PATH="coverage/DOF_TaiWan$Delete_Equ_NOT_IN_SHOP.coverage" NAME="Delete_Equ_NOT_IN_SHOP Coverage Results" MODIFIED="1564473812303" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Equipment" />
+    <SUITE FILE_PATH="coverage/DOF_TaiWan$Delete_Equ_NOT_IN_SHOP.coverage" NAME="Delete_Equ_NOT_IN_SHOP Coverage Results" MODIFIED="1564833200110" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Equipment" />
     <SUITE FILE_PATH="coverage/DNFTools$addtitle.coverage" NAME="addtitle Coverage Results" MODIFIED="1561097744825" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/DNFTools$Delete_dgn.coverage" NAME="Delete_dgn Coverage Results" MODIFIED="1561198266101" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/DOF_TaiWan$NPK.coverage" NAME="NPK Coverage Results" MODIFIED="1564473789738" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/MediaSourceTools" />
