@@ -1,11 +1,11 @@
-'''
+"""
 IMG文件操作类模块
-'''
-from NkpImgTools import *
+"""
 import zlib
 from PNG import *
 
-v2IndexType = [bytes2int(b'\x10'), bytes2int(b'\x0f'), bytes2int(b'\x0e')]
+v2IndexType = [0x10, 0x0f, 0x0e]
+v5DDS_Index_Type = [0x12, 0x13, 0x14]
 
 
 class Img(object):
@@ -18,61 +18,91 @@ class Img(object):
         with open(self.filePath, 'rb') as imgFile:
             self.header = imgFile.read(16)
             # 获取索引表大小
-            self.indexSize = bytes2int(imgFile.read(4))
+            self.index_size = bytes2int(imgFile.read(4))
             # 保留内容
-            self.unsignedE = imgFile.read(4)
+            self.keep_content = imgFile.read(4)
             # 获取img版本
-            self.imgEdition = bytes2int(imgFile.read(4))
+            self.edition = bytes2int(imgFile.read(4))
             # 获取索引表数量
-            self.indexCount = bytes2int(imgFile.read(4))
-            self._imgEditionReadC(imgFile)
+            self.index_count = bytes2int(imgFile.read(4))
+            # 根据img类型读取img文件内容
+            self._img_content_read(imgFile)
 
-    def _imgEditionReadC(self, imgFile):
-        edition = self.imgEdition
-        if edition == 2:
-            # 版本不同，以下读取内容不同
-            indexContent = imgFile.read(self.indexSize)
-            self.indexContents = self._v2ImgIndexContentSplit(indexContent)
-            self.indexAnas = self._v2ImgPicAnas()
-            # 剩余字节流为贴图数据
-            self.picContents = imgFile.read()
-            self._v2ImgPicContentSplit()
-        if edition == 4:
-            pass
+    def _img_content_read(self, imgFile):
+        # V4
+        if self.edition == 4:
+            palette_count = bytes2int(imgFile.read(4))
+            palette = imgFile.read(4*palette_count)
+            self.palette_colors = palette_ana(palette_count, palette)
+            # print(self.palette_count)
+            # print(self.palette)
 
-    # 对于v2格式的img文件的操作方法
+        # V5
+        if self.edition == 5:
+            dds_index_count = bytes2int(imgFile.read(4))
+            img_size = bytes2int(imgFile.read(4))
+            palette_count = bytes2int(imgFile.read(4))
+            palette = imgFile.read(4*palette_count)
+            dds_index_content = imgFile.read(28 * dds_index_count)
+
+        # V6
+        if self.edition == 6:
+            # 读取颜色分类
+            palette_type_count = bytes2int(imgFile.read(4))
+            palette_types = {}
+            for index in range(palette_type_count):
+                palette_count = bytes2int(imgFile.read(4))
+                palette = imgFile.read(4 * palette_count)
+                palette_types[index] = [palette_count, palette]
+
+        # V2
+
+        indexContent = imgFile.read(self.index_size)
+        # 索引内容分割
+        self.indexContents = self.index_content_split(indexContent)
+        self.indexAna = self.index_Ana()
+        # 剩余字节流为贴图数据
+        self.picContents = imgFile.read()
+        self.pic_content_split()
+
     # 分割索引内容
-    def _v2ImgIndexContentSplit(self, IndexContent):
-        '''
+    def index_content_split(self, IndexContent):
+        """
         用来按序分割v2格式下img文件的索引表项内容
         :param IndexContent: v2格式下img文件的索引表内容
         :return: 返回一个按序排列的索引表项列表
-        '''
+        """
         self.indexContents = []
         # 设置判定类型的偏移地址
         typeFlagAddress = 0
         # 如果存在索引数量的话
-        if self.indexCount:
+        if self.index_count:
             # 根据数量来进行一个for循环遍历出imgIndex的内容
-            for index in range(self.indexCount):
+            for index in range(self.index_count):
                 if IndexContent[typeFlagAddress] == 17:
-                    self.indexContents.append(IndexContent[typeFlagAddress: (2 + typeFlagAddress)])
-                    typeFlagAddress += 2
-                if IndexContent[typeFlagAddress] in v2IndexType:
+                    self.indexContents.append(IndexContent[typeFlagAddress: (8 + typeFlagAddress)])
+                    typeFlagAddress += 8
+                elif IndexContent[typeFlagAddress] in v2IndexType:
                     self.indexContents.append(IndexContent[typeFlagAddress: (36 + typeFlagAddress)])
                     typeFlagAddress += 36
+                elif IndexContent[typeFlagAddress] in v5DDS_Index_Type:
+                    self.indexContents.append(IndexContent[typeFlagAddress: (64 + typeFlagAddress)])
+                    typeFlagAddress += 64
         return self.indexContents
 
     # 获取图片内容分析
-    def _v2ImgPicAnas(self):
-        '''
+    def index_Ana(self):
+        """
         对v2格式的img文件索引内容进行分析
         :return: 返回一个img索引序号做key，分析内容为值的字典
-        '''
-        indexAnas = {}
-        for index in range(self.indexCount):
+        """
+        indexAna = {}
+        for index in range(self.index_count):
             indexContent = self.indexContents[index]
-            if len(indexContent) == 36:
+            if len(indexContent) == 8:
+                picPoint = indexContent[-4]
+                indexAna[index] = picPoint
+            elif len(indexContent) == 36:
                 # 颜色系统
                 colorSystem = bytes2int(indexContent[:4])
                 # 压缩状态
@@ -91,64 +121,39 @@ class Img(object):
                 frameWidth = bytes2int(indexContent[28:32])
                 # 帧域高
                 frameHeight = bytes2int(indexContent[32:-1])
-                indexAnas[index] = [colorSystem, zlibState, picWidth, picHeight, picSize,
-                                    posX, posY, frameWidth, frameHeight]
-            elif len(indexContent) == 2:
-                picPoint = indexContent[-1]
-                indexAnas[index] = picPoint
-        return indexAnas
+                indexAna[index] = [colorSystem, zlibState, picWidth, picHeight, picSize,
+                                   posX, posY, frameWidth, frameHeight]
+            # dds特殊索引
+            elif len(indexContent) == 64:
+                pass
+        return indexAna
 
     # 获取图片内容
-    def _v2ImgPicContentSplit(self):
-        '''
+    def pic_content_split(self):
+        """
         将图片资源分析分割,并加入到对应的PNG分析
         :return:
-        '''
+        """
         # 设定一个index序号和分割到的pic文件流的字典
         # 设定分割起点
         picSplitStartP = 0
-        for index in range(self.indexCount):
-            if type(self.indexAnas[index]) == list:
-                picSize = self.indexAnas[index][4]
+        for index in range(self.index_count):
+            if type(self.indexAna[index]) == list:
+                picSize = self.indexAna[index][4]
                 # 分割部分大小为 picSize 分割起点设置为0，并每次分割，增加picSize
                 picContent = self.picContents[picSplitStartP: picSplitStartP + picSize]
                 # 解压缩zlib格式
-                if self.indexAnas[index][1] == 6:
-                    self.indexAnas[index].append(zlib.decompress(picContent))
+                if self.indexAna[index][1] == 6:
+                    self.indexAna[index].append(zlib.decompress(picContent))
                 else:
-                    self.indexAnas[index].append(picContent)
+                    self.indexAna[index].append(picContent)
                 picSplitStartP += picSize
             else:
                 # 如果不是图片索引则跳过
                 continue
         return True
 
-    # v4格式img文件的操作方法
-
 
 if __name__ == "__main__":
-    a = Img('D:\\UserData\\Desktop\\test\\v28888.img')
-    image = Image.open('D:\\UserData\\Desktop\\test\\0.png', 'r')
-    width = a.indexAnas[0][-1][2]
-    height = a.indexAnas[0][-1][3]
-    print(image.size[0], image.size[1])
-    relist = a.indexAnas[0][-1][::-1]
-    rgbaPixel = []
-    for i in range(int(len(relist) / 4)):
-        A = relist[4 * i]
-        R = relist[1 + 4 * i]
-        G = relist[2 + 4 * i]
-        B = relist[3 + 4 * i]
-        rgbaPixel.append((R, G, B, A))
-    k = 0
-    for i in range(image.size[0]):
-        for j in range(image.size[1]):
-            print('1', k, image.getpixel((i, j)))
-            print('2', k, rgbaPixel[k])
-            k += 1
-
-
-
-
-
-
+    a = Img('D:\\UserData\\Desktop\\test\\v4.img')
+    print(a.palette_colors)
