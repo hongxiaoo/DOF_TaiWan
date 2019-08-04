@@ -1,8 +1,13 @@
-'''
+"""
 NPK文件操作类模块
-'''
-from NkpImgTools import *
+"""
 from PNG import *
+
+
+def _saveImg(imgContent, imgNamePath):
+    with open(imgNamePath, 'wb') as imgFile:
+        imgFile.write(imgContent)
+
 
 class Npk(object):
 
@@ -47,13 +52,13 @@ class Npk(object):
             self.data4 = content.read()
         return [self.header, self.data1, self.data2, self.data3, self.data4, self.img_count]
 
-    def _saveNpk(self, flagIndex = True):
-        '''
+    def _saveNpk(self, flagIndex=True):
+        """
         保存NPK文件
         :param flagIndex: 是否备份保存，True保存一个name - bak.npk的文件。
         False覆盖保存
         :return: 返回保存状态
-        '''
+        """
         self.dataContents = self._dataContents
         try:
             if flagIndex:
@@ -69,11 +74,10 @@ class Npk(object):
             return False
 
     def _imgAnalyse(self):
-        '''
+        """
         根据imgIndex索引表内容返回分析的img内容
-        :param img_index: img编号，从0开始
         :return:img在data4中的地址偏移量，sizeof(img)，imgName
-        '''
+        """
         self.imgAnalyse = {}
         for index in range(self.img_count):
             img_index_content = self.data2[index]
@@ -84,10 +88,10 @@ class Npk(object):
         return self.imgAnalyse
 
     def _listAll(self):
-        '''
+        """
         列出所有img的序号和名称
         :return:返回一个{序号：名称}的dict
-        '''
+        """
         indexNames = {}
         for index in range(self.img_count):
             print(index, '\t', self.imgAnalyse[index][2], '\t')
@@ -105,11 +109,11 @@ class Npk(object):
         return imgContent
 
     def _renameImg(self, renameIndex):
-        '''
+        """
         重命名img
         :param renameIndex: 重命名img序号
         :return: 修改结果
-        '''
+        """
         # 判断renameIndex是否存在
         if self.img_count == 0:
             renameIndex = -1
@@ -139,7 +143,7 @@ class Npk(object):
                     return False
 
     def _replaceImg(self, imgObjPath, replaceImgIndex):
-        with open(imgObjPath,'rb') as imgObj:
+        with open(imgObjPath, 'rb') as imgObj:
             imgContent = imgObj.read()
         # 刷新dataContents
         self.dataContents = self._dataContents
@@ -148,7 +152,7 @@ class Npk(object):
         offSet = newSize - oldSize
         # 改变替换后的imgIndexContent后面imgIndexContent的位置偏移
         # img索引最大值 = 总数 - 1
-        for i in range(replaceImgIndex+1, self.img_count):
+        for i in range(replaceImgIndex + 1, self.img_count):
             self.data2[i] = int2Bytes(self.imgAnalyse[i][0] + offSet) + self.data2[i][4:]
         # newImg`s size
         bytesSize = int2Bytes(newSize)
@@ -158,21 +162,21 @@ class Npk(object):
         # 修改data4内容
         date_3Len = len(self.header + self.data1 + self.data2Content + self.data3)
         address = self.imgAnalyse[replaceImgIndex][0]
-        oldImgContentS = address-date_3Len
+        oldImgContentS = address - date_3Len
         self.data4 = self.data4[:oldImgContentS] + imgContent + self.data4[oldImgContentS + oldSize:]
 
     def _addImg(self, imgObjPath):
-        '''
+        """
         在NPK文件流 <末尾> 新添加一个img文件
         :param imgObjPath: img path
         :return:
-        '''
-        with open(imgObjPath,'rb') as imgObj:
+        """
+        with open(imgObjPath, 'rb') as imgObj:
             imgContent = imgObj.read()
         # 刷新dataContents
         self.dataContents = self._dataContents
         # 偏移地址，在末尾添加img，前面的内容只有data2中新添加264字节，偏移地址在原NPK总长基础上+264
-        imgContentAddress = len(self.dataContents) +264
+        imgContentAddress = len(self.dataContents) + 264
         bytesAddress = int2Bytes(imgContentAddress)
         # newImg`s size
         size = len(imgContent)
@@ -184,7 +188,7 @@ class Npk(object):
         newImgIndexContent = bytesAddress + bytesSize + bytesName
         # 在末尾插入一个264字节的新索引，前面的img位置偏移增加264
         for index in range(self.img_count):
-            self.data2[index] = int2Bytes(self.imgAnalyse[index][0]+264) + self.data2[index][4:]
+            self.data2[index] = int2Bytes(self.imgAnalyse[index][0] + 264) + self.data2[index][4:]
         # img数量+1
         self.img_count += 1
         # 重新计算data1
@@ -196,17 +200,17 @@ class Npk(object):
         # 重新校验SHA值
         self.data3 = self._updateSHA()
         # 添加imgAnalyse索引
-        self.imgAnalyse[self.img_count-1] = [imgContentAddress, size, imgName]
+        self.imgAnalyse[self.img_count - 1] = [imgContentAddress, size, imgName]
 
     def _insertImg(self, imgObjPath, insertIndex):
         pass
 
     def _delImg(self, delImgIndex):
-        '''
+        """
         删除Img
         :param delImgIndex: 删除Img的编号
         :return:是否成功删除
-        '''
+        """
         if delImgIndex < self.img_count:
             self.dataContents = self._dataContents
             # 获取被删除imgSize
@@ -214,7 +218,7 @@ class Npk(object):
             # 删除img内容
             date_3Len = len(self.header + self.data1 + self.data2Content + self.data3)
             address = self.imgAnalyse[delImgIndex][0]
-            oldImgContentS = address-date_3Len
+            oldImgContentS = address - date_3Len
             self.data4 = self.data4[:oldImgContentS] + self.data4[oldImgContentS + delSize:]
             # img数量 - 1
             self.img_count -= 1
@@ -226,7 +230,7 @@ class Npk(object):
             for i in range(self.img_count):
                 self.data2[i] = int2Bytes(self.imgAnalyse[i][0] - 264) + self.data2[i][4:]
             # 在被删除索引后所有索引地址偏移 - 删除imgSize
-            for i in range(delImgIndex+1, self.img_count):
+            for i in range(delImgIndex + 1, self.img_count):
                 self.data2[i] = int2Bytes(self.imgAnalyse[i][0] - delSize) + self.data2[i][4:]
             self.data3 = self._updateSHA()
             # 更新imgAnalyse索引
@@ -241,56 +245,53 @@ class Npk(object):
             self._listAll()
             return False
 
-    def _dropImg(self, dropIndex = -1, dropAll = False):
+    def _dropImg(self, dropIndex=-1, dropAll=False):
         if dropAll:
             filePath = self._getSavePath()
             self.dataContents = self._dataContents
             for index in range(self.img_count):
                 imgNamePath = filePath + self.imgAnalyse[index][-1].split('/')[-1]
                 dropImgContent = self._getImgContent(index)
-                self._saveImg(dropImgContent, imgNamePath)
+                _saveImg(dropImgContent, imgNamePath)
             return True
         else:
-            if  int(dropIndex) > -1 and int(dropIndex) < self.img_count:
+            if -1 < int(dropIndex) < self.img_count:
                 self.dataContents = self._dataContents
                 filePath = self._getSavePath(dropIndex)
                 dropImgContent = self._getImgContent(dropIndex)
                 imgNamePath = filePath + self.imgAnalyse[dropIndex][-1].split('/')[-1]
-                self._saveImg(dropImgContent, imgNamePath)
+                _saveImg(dropImgContent, imgNamePath)
                 print('已提取：' + self.imgAnalyse[dropIndex][-1])
                 return True
             else:
-                print('输入序号有误，序号范围因为0 - ', self.img_count -1, '内的整数\n', '请重新输入序号，输入 -1 退出')
+                print('输入序号有误，序号范围因为0 - ', self.img_count - 1, '内的整数\n', '请重新输入序号，输入 -1 退出')
                 reIndex = int(input())
                 while reIndex != -1:
                     if self._dropImg(reIndex):
                         break
 
-    def _saveImg(self, imgContent, imgNamePath):
-        with open(imgNamePath, 'wb') as imgFile:
-            imgFile.write(imgContent)
-
-    def _getSavePath(self, imgIndex = 0):
-        '''
+    def _getSavePath(self, imgIndex=0):
+        """
         获取提取Img的文件夹路径
         :param imgIndex: 提取的img编号，默认为0，方便进行批量提取
         :return: 文件夹路径
-        '''
+        """
         filePath = ''
         for path in self.filePath.split('\\')[:-1]:
             filePath += path + '\\'
         for path in self.imgAnalyse[imgIndex][-1].replace('/', '\\').split('\\')[:-1]:
             filePath += path + '\\'
         # 文件是否存在，不存在则创建
-        isExitPath(filePath)
+        is_exit_path(filePath)
         return filePath
 
     def _updateSHA(self):
-        '''
+        """
         重新计算SHA256值并赋值给self.data3（SHA校验码）
         :return: 新SHA256值
-        '''
+        """
         return shaDecode(self.header + self.data1 + self._data2Content)
+
 
 # 测试代码
 if __name__ == '__main__':
@@ -305,4 +306,3 @@ if __name__ == '__main__':
             # npkObj._listAll()
             npkObj._dropImg(-1, dropAll=False)
             break
-
