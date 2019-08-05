@@ -3,12 +3,11 @@ IMG内部PNG图片操作类模块
 """
 from NkpImgTools import *
 from PIL import Image
-v2ColorSystem = {16: 'ARGB8888', 15: 'ARGB4444', 14: 'ARGB1555'}
 
 
 class Pic:
     def __init__(self, pngAnaContent):
-        self.colorSystem = v2ColorSystem[pngAnaContent[0]]
+        self.colorSystem = pngAnaContent[0]
         self.width = pngAnaContent[2]
         self.height = pngAnaContent[3]
         self.content = pngAnaContent[-1]
@@ -29,9 +28,14 @@ class Pic:
             self.put_pixels(argb4444(self.content), self.img)
         elif self.colorSystem == 'ARGB1555':
             self.put_pixels(argb1555(self.content), self.img)
+        elif self.colorSystem == 'ABGR8888':
+            self.put_pixels(self.content, self.img)
 
     def show(self):
         self.img.show()
+
+    def save(self, path):
+        self.img.save(path)
 
 
 if __name__ == '__main__':

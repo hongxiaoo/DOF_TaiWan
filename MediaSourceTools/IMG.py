@@ -6,11 +6,16 @@ from PNG import *
 
 v2IndexType = [0x10, 0x0f, 0x0e]
 v5DDS_Index_Type = [0x12, 0x13, 0x14]
+colorSystem = {2: {16: 'ARGB8888', 15: 'ARGB4444', 14: 'ARGB1555'},
+               4: {14: 'ABGR8888'},
+               5: {14: 'ABGR8888'}, }
 
 
 class Img(object):
 
     def __init__(self, filePath):
+        self.name = filePath.split('\\')[-1]
+        self.indexContents = []
         self.filePath = filePath
         self._readImg()
 
@@ -50,10 +55,10 @@ class Img(object):
             # 读取颜色分类
             palette_type_count = bytes2int(imgFile.read(4))
             palette_types = {}
-            for index in range(palette_type_count):
+            for i in range(palette_type_count):
                 palette_count = bytes2int(imgFile.read(4))
                 palette = imgFile.read(4 * palette_count)
-                palette_types[index] = [palette_count, palette]
+                palette_types[i] = [palette_count, palette]
 
         # V2
 
@@ -65,6 +70,10 @@ class Img(object):
         self.picContents = imgFile.read()
         self.pic_content_split()
 
+        # V4类型调色板的图片像素获取
+        if self.edition == 4:
+            self.v4_color_pixel()
+
     # 分割索引内容
     def index_content_split(self, IndexContent):
         """
@@ -72,13 +81,12 @@ class Img(object):
         :param IndexContent: v2格式下img文件的索引表内容
         :return: 返回一个按序排列的索引表项列表
         """
-        self.indexContents = []
         # 设置判定类型的偏移地址
         typeFlagAddress = 0
         # 如果存在索引数量的话
         if self.index_count:
             # 根据数量来进行一个for循环遍历出imgIndex的内容
-            for index in range(self.index_count):
+            for i in range(self.index_count):
                 if IndexContent[typeFlagAddress] == 17:
                     self.indexContents.append(IndexContent[typeFlagAddress: (8 + typeFlagAddress)])
                     typeFlagAddress += 8
@@ -96,15 +104,16 @@ class Img(object):
         对v2格式的img文件索引内容进行分析
         :return: 返回一个img索引序号做key，分析内容为值的字典
         """
+        global colorSystem
         indexAna = {}
-        for index in range(self.index_count):
-            indexContent = self.indexContents[index]
+        for i in range(self.index_count):
+            indexContent = self.indexContents[i]
             if len(indexContent) == 8:
                 picPoint = indexContent[-4]
-                indexAna[index] = picPoint
+                indexAna[i] = picPoint
             elif len(indexContent) == 36:
                 # 颜色系统
-                colorSystem = bytes2int(indexContent[:4])
+                color_system = colorSystem[self.edition][bytes2int(indexContent[:4])]
                 # 压缩状态
                 zlibState = bytes2int(indexContent[4:8])
                 # 图像宽
@@ -121,8 +130,8 @@ class Img(object):
                 frameWidth = bytes2int(indexContent[28:32])
                 # 帧域高
                 frameHeight = bytes2int(indexContent[32:-1])
-                indexAna[index] = [colorSystem, zlibState, picWidth, picHeight, picSize,
-                                   posX, posY, frameWidth, frameHeight]
+                indexAna[i] = [color_system, zlibState, picWidth, picHeight, picSize,
+                               posX, posY, frameWidth, frameHeight]
             # dds特殊索引
             elif len(indexContent) == 64:
                 pass
@@ -137,23 +146,43 @@ class Img(object):
         # 设定一个index序号和分割到的pic文件流的字典
         # 设定分割起点
         picSplitStartP = 0
-        for index in range(self.index_count):
-            if type(self.indexAna[index]) == list:
-                picSize = self.indexAna[index][4]
+        for i in range(self.index_count):
+            if type(self.indexAna[i]) == list:
+                picSize = self.indexAna[i][4]
                 # 分割部分大小为 picSize 分割起点设置为0，并每次分割，增加picSize
                 picContent = self.picContents[picSplitStartP: picSplitStartP + picSize]
                 # 解压缩zlib格式
-                if self.indexAna[index][1] == 6:
-                    self.indexAna[index].append(zlib.decompress(picContent))
+                if self.indexAna[i][1] == 6:
+                    self.indexAna[i].append(zlib.decompress(picContent))
                 else:
-                    self.indexAna[index].append(picContent)
+                    self.indexAna[i].append(picContent)
                 picSplitStartP += picSize
             else:
                 # 如果不是图片索引则跳过
                 continue
         return True
 
+    def v4_color_pixel(self):
+        for element in self.indexAna.keys():
+            pic_ana = self.indexAna[element]
+            if type(pic_ana) == list:
+                if pic_ana[2] * pic_ana[3] * 2 == pic_ana[4]:
+                    self.indexAna[element][0] = 'ARGB1555'
+                    continue
+                pixels = []
+                replace_flag = True
+                for i in pic_ana[-1]:
+                    pixels.append(self.palette_colors[i])
+                if replace_flag:
+                    self.indexAna[element][-1] = pixels
+
 
 if __name__ == "__main__":
     a = Img('D:\\UserData\\Desktop\\test\\v4.img')
-    print(a.palette_colors)
+    # print(a.palette_colors)
+    save_directory = os.path.abspath('.') + '\\' + a.name
+    for index in a.indexAna.keys():
+        if type(a.indexAna[index]) == list:
+            image = Pic(a.indexAna[index])
+            is_exit_path(save_directory)
+            image.save(save_directory + '\\' + str(index) + '.png')

@@ -111,7 +111,7 @@ def shaDecode(obj_SHA_Content):
     shaCode = hashlib.sha256(shaCodeContent).hexdigest()
     shaCodeHex = r''
     for i in range(32):
-        hex_str = '\\x' + shaCode[2*i:2*i+2]
+        hex_str = '\\x' + shaCode[2 * i:2 * i + 2]
         shaCodeHex += hex_str
     content_bytes = eval('b' + '\'' + shaCodeHex + '\'')
     # print(content_bytes)
@@ -121,7 +121,7 @@ def shaDecode(obj_SHA_Content):
 def argb8888(pic_content):
     pixels = []
     for i in range(int(len(pic_content) / 4)):
-        pixel = pic_content[4*i: 4+4*i]
+        pixel = pic_content[4 * i: 4 + 4 * i]
         cloA = (bytes2int(pixel) & 0xff000000) >> 24
         cloR = (bytes2int(pixel) & 0x00ff0000) >> 16
         cloG = (bytes2int(pixel) & 0x0000ff00) >> 8
@@ -133,7 +133,7 @@ def argb8888(pic_content):
 def argb4444(pic_content):
     pixels = []
     for i in range(int(len(pic_content) / 2)):
-        pixel = pic_content[2*i: 2+2*i]
+        pixel = pic_content[2 * i: 2 + 2 * i]
         # print(pixel)
         cloA = ((bytes2int(pixel) & 0xf000) >> 12) * 0x11
         cloR = (bytes2int(pixel) & 0x0f00) >> 8 << 4
@@ -146,7 +146,7 @@ def argb4444(pic_content):
 def argb1555(pic_content):
     pixels = []
     for i in range(int(len(pic_content) / 2)):
-        pixel = pic_content[2*i: 2+2*i]
+        pixel = pic_content[2 * i: 2 + 2 * i]
         cloA = ((bytes2int(pixel) & 0x8000) >> 15) * 0xff
         cloR = (bytes2int(pixel) & 0x7c00) >> 10 << 3
         cloG = (bytes2int(pixel) & 0x03e0) >> 5 << 3
@@ -159,10 +159,10 @@ def argb1555(pic_content):
 def palette_ana(palette_count, palette):
     colors = []
     for index in range(palette_count):
-        color_data = bytes2int(palette[4*index: 4+4*index])
+        color_data = bytes2int(palette[4 * index: 4 + 4 * index])
         colA = (color_data & 0xff000000) >> 24
         colR = (color_data & 0x000000ff) >> 0
         colG = (color_data & 0x0000ff00) >> 8
         colB = (color_data & 0x00ff0000) >> 16
-        colors.append((colA, colB, colG, colR))
+        colors.append((colR, colG, colB, colA))
     return colors
