@@ -1,8 +1,8 @@
 """
 NPK文件操作类模块
 """
-from PNG import *
-
+from IMG import *
+from tqdm import tqdm
 
 def _saveImg(imgContent, imgNamePath):
     with open(imgNamePath, 'wb') as imgFile:
@@ -79,12 +79,16 @@ class Npk(object):
         :return:img在data4中的地址偏移量，sizeof(img)，imgName
         """
         self.imgAnalyse = {}
+        self.data2Content = self._data2Content
+        date_3Len = len(self.header + self.data1 + self.data2Content + self.data3)
         for index in range(self.img_count):
             img_index_content = self.data2[index]
-            address = img_index_content[:4]
-            size = img_index_content[4:8]
+            address = bytes2int(img_index_content[:4])
+            size = bytes2int(img_index_content[4:8])
             name = bytes2Name(img_index_content[8:-1])
-            self.imgAnalyse[index] = [bytes2int(address), bytes2int(size), name]
+            imgContentSP = address - date_3Len
+            imgContent = self.data4[imgContentSP:imgContentSP + size]
+            self.imgAnalyse[index] = [address, size, name, imgContent]
         return self.imgAnalyse
 
     def _listAll(self):
@@ -97,16 +101,6 @@ class Npk(object):
             print(index, '\t', self.imgAnalyse[index][2], '\t')
             indexNames[index] = self.imgAnalyse[index][2]
         return indexNames
-
-    def _getImgContent(self, imgIndex):
-        contentSize = self.imgAnalyse[imgIndex][1]
-        # 提取img内容
-        date_3Len = len(self.header + self.data1 + self.data2Content + self.data3)
-        address = self.imgAnalyse[imgIndex][0]
-        # 设定提取内容的起点 imgContentSP = imgContentStartPoint
-        imgContentSP = address - date_3Len
-        imgContent = self.data4[imgContentSP:imgContentSP + contentSize]
-        return imgContent
 
     def _renameImg(self, renameIndex):
         """
@@ -136,7 +130,7 @@ class Npk(object):
                     self.data2[renameIndex] = self.data2[renameIndex][:8] + newNameBytes
                     self.imgAnalyse[renameIndex][2] = newName
                     self.data3 = self._updateSHA()
-                    print(oldName, "——已修改为——", self.imgAnalyse[renameIndex][-1])
+                    print(oldName, "——已修改为——", self.imgAnalyse[renameIndex][2])
                     return True
                 except:
                     print(oldName, '——修改失败——')
@@ -152,8 +146,8 @@ class Npk(object):
         offSet = newSize - oldSize
         # 改变替换后的imgIndexContent后面imgIndexContent的位置偏移
         # img索引最大值 = 总数 - 1
-        for i in range(replaceImgIndex + 1, self.img_count):
-            self.data2[i] = int2Bytes(self.imgAnalyse[i][0] + offSet) + self.data2[i][4:]
+        for j in range(replaceImgIndex + 1, self.img_count):
+            self.data2[j] = int2Bytes(self.imgAnalyse[j][0] + offSet) + self.data2[j][4:]
         # newImg`s size
         bytesSize = int2Bytes(newSize)
         # 新索引内容
@@ -227,11 +221,11 @@ class Npk(object):
             # 删除data2中的索引
             del self.data2[delImgIndex]
             # 所有剩余索引，地址偏移 - 264
-            for i in range(self.img_count):
-                self.data2[i] = int2Bytes(self.imgAnalyse[i][0] - 264) + self.data2[i][4:]
+            for j in range(self.img_count):
+                self.data2[j] = int2Bytes(self.imgAnalyse[j][0] - 264) + self.data2[j][4:]
             # 在被删除索引后所有索引地址偏移 - 删除imgSize
-            for i in range(delImgIndex + 1, self.img_count):
-                self.data2[i] = int2Bytes(self.imgAnalyse[i][0] - delSize) + self.data2[i][4:]
+            for j in range(delImgIndex + 1, self.img_count):
+                self.data2[j] = int2Bytes(self.imgAnalyse[j][0] - delSize) + self.data2[j][4:]
             self.data3 = self._updateSHA()
             # 更新imgAnalyse索引
             del self.imgAnalyse[delImgIndex]
@@ -251,17 +245,17 @@ class Npk(object):
             self.dataContents = self._dataContents
             for index in range(self.img_count):
                 imgNamePath = filePath + self.imgAnalyse[index][-1].split('/')[-1]
-                dropImgContent = self._getImgContent(index)
+                dropImgContent = self.imgAnalyse[index][3]
                 _saveImg(dropImgContent, imgNamePath)
             return True
         else:
             if -1 < int(dropIndex) < self.img_count:
                 self.dataContents = self._dataContents
                 filePath = self._getSavePath(dropIndex)
-                dropImgContent = self._getImgContent(dropIndex)
+                dropImgContent = self.imgAnalyse[dropIndex][3]
                 imgNamePath = filePath + self.imgAnalyse[dropIndex][-1].split('/')[-1]
                 _saveImg(dropImgContent, imgNamePath)
-                print('已提取：' + self.imgAnalyse[dropIndex][-1])
+                print('已提取：' + self.imgAnalyse[dropIndex][2])
                 return True
             else:
                 print('输入序号有误，序号范围因为0 - ', self.img_count - 1, '内的整数\n', '请重新输入序号，输入 -1 退出')
@@ -299,10 +293,11 @@ if __name__ == '__main__':
         if '.NPK' in file:
             npkObj = Npk(file)
             print(npkObj.name, "Img数量为：", npkObj.img_count)
-            # npkObj._renameImg(0)
-            # npkObj._delImg(0)
-            # npkObj._addImg('D:\\UserData\\Desktop\\test\\testimg.img')
-            # npkObj._saveObj()
-            # npkObj._listAll()
-            npkObj._dropImg(-1, dropAll=False)
-            break
+            for i in tqdm(npkObj.imgAnalyse.keys()):
+                img = Img()
+                img.from_npk(npkObj.imgAnalyse[i])
+                try:
+                    img.read_content()
+                    img.save_all_pic()
+                except:
+                    continue
