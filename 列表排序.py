@@ -1,7 +1,5 @@
 import os
-
-def GetDesktopPath():
-  return os.path.join(os.path.expanduser("~"), 'Desktop')
+from tool import laf, GetDesktopPath
 
 desktop = GetDesktopPath()
 

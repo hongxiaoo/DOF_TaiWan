@@ -1,22 +1,8 @@
 # coding=utf-8
-import os
+# import os
 import pickle
 import re
-
-def list_all_files(root_dir):
-    _files = []
-    _list = os.listdir(root_dir)  # 列出文件夹下所有的目录与文件
-    for i in range(0, len(_list)):
-        path = os.path.join(root_dir, _list[i])
-        if os.path.isdir(path):
-            _files.extend(list_all_files(path))
-        if os.path.isfile(path):
-            _files.append(path)
-    return _files
-
-
-def GetDesktopPath():
-  return os.path.join(os.path.expanduser("~"), 'Desktop')
+from tool import laf, GetDesktopPath
 
 
 desktop = GetDesktopPath()
@@ -25,7 +11,7 @@ with open('avatar_type.pk','rb') as pick:
 
 print avatar_dict
 
-for file in list_all_files(desktop + '\\avatar'):
+for file in laf(desktop + '\\avatar'):
     if '.equ' in file:
         with open(file) as text:
             content = text.read()

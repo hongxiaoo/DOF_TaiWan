@@ -2,27 +2,14 @@
 from os import path, makedirs, listdir, remove
 from re import findall, S
 from shutil import copyfile, move
-def GetDesktopPath():
-    return path.join(path.expanduser("~"), 'Desktop')
-
-
-def list_all_files(root_dir):
-    _files = []
-    _list = listdir(root_dir)  # 列出文件夹下所有的目录与文件
-    for i in range(0, len(_list)):
-        lst_path = path.join(root_dir, _list[i])
-        if path.isdir(lst_path):
-            _files.extend(list_all_files(lst_path))
-        if path.isfile(lst_path):
-            _files.append(lst_path)
-    return _files
+from tool import laf, GetDesktopPath
 
 
 desktop = GetDesktopPath()
 with open(desktop + '\\stackable\\stackable.lst') as file:
     stk_lst = [line.strip().lower() for line in file.readlines()]
 
-for stk_file in list_all_files(desktop + '\\stackable'):
+for stk_file in laf(desktop + '\\stackable'):
     if '.stk' in stk_file:
 
         stk_lst_path = '`' + stk_file.replace(desktop + '\\stackable\\', '').lower().replace('\\', '/') + '`'

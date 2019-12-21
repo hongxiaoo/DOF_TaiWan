@@ -41,7 +41,7 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -307,6 +307,7 @@
       <workItem from="1576733669632" duration="3856000" />
       <workItem from="1576854097830" duration="1714000" />
       <workItem from="1576924610226" duration="2340000" />
+      <workItem from="1576933675122" duration="705000" />
     </task>
     <servers />
   </component>
@@ -353,10 +354,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="264" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1576930744683" />
-    <state x="686" y="196" key="SettingsEditor" timestamp="1576691711685">
+    <state x="686" y="196" key="SettingsEditor" timestamp="1576933724390">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="686" y="196" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1576691711685" />
+    <state x="686" y="196" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1576933724390" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1576599400930">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

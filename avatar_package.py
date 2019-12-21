@@ -1,31 +1,10 @@
 # coding=utf-8
-from os import path, makedirs, listdir
 from re import findall, S
 from shutil import copyfile, move
-
+from tool import laf, GetDesktopPath, iep
+from os import path
 
 # 时装礼包组成
-
-
-def GetDesktopPath():
-    return path.join(path.expanduser("~"), 'Desktop')
-
-
-def is_exit_path(dir_path):
-    if not path.exists(dir_path):
-        makedirs(dir_path)
-
-
-def list_all_files(root_dir):
-    _files = []
-    _list = listdir(root_dir)  # 列出文件夹下所有的目录与文件
-    for i in range(0, len(_list)):
-        lst_path = path.join(root_dir, _list[i])
-        if path.isdir(lst_path):
-            _files.extend(list_all_files(lst_path))
-        if path.isfile(lst_path):
-            _files.append(lst_path)
-    return _files
 
 
 def get_lst(lst_path):
@@ -78,7 +57,7 @@ def extract_code(pkg_path):
 
 def copy_file(extract_file_path):
     #创建提取后文件上级目录
-    is_exit_path(path.split(extract_file_path)[0].replace('Desktop', 'Desktop\\new'))
+    iep(path.split(extract_file_path)[0].replace('Desktop', 'Desktop\\new'))
     #拷贝提取文件
     copyfile(extract_file_path, extract_file_path.replace('Desktop', 'Desktop\\new'))
 
@@ -91,14 +70,14 @@ if __name__ == '__main__':
     extract_codes = []
     log = ''
 
-    for package in list_all_files(desktop + '\\extract'):
+    for package in laf(desktop + '\\extract'):
         # 先写入礼包lst
         pkg_lst_path = '`' + package.replace(desktop + '\\extract\\stackable\\', '').lower() + '`'
 
         if pkg_lst_path in stk:
             pkg_code = stk[stk.index(pkg_lst_path) - 1]
 
-            with open(desktop + '\\newstk.lst', 'a+') as newlst:
+            with open(desktop + '\\new_stk.lst', 'a+') as newlst:
                 newlst.write(pkg_code + '\n' + pkg_lst_path.replace('\\', '/') + '\n')
         extract_codes += extract_code(package)
 
@@ -111,13 +90,13 @@ if __name__ == '__main__':
             ex_path = equ[equ.index(code) + 1]
             file_path = desktop + '\\equipment\\' + ex_path.replace('`', '')
             copy_file(file_path)
-            with open(desktop + '\\newequ.lst', 'a+') as newlst:
+            with open(desktop + '\\new_equ.lst', 'a+') as newlst:
                 newlst.write(code + '\n' + ex_path.replace('\\', '/') + '\n')
         elif code in stk:
             ex_path = stk[stk.index(code) + 1]
             file_path = desktop + '\\stackable\\' + ex_path.replace('`', '')
             copy_file(file_path)
-            with open(desktop + '\\newstk.lst', 'a+') as newlst:
+            with open(desktop + '\\new_stk.lst', 'a+') as newlst:
                 newlst.write(code + '\n' + ex_path.replace('\\', '/') + '\n')
         else:
             log += code + '\t error'
