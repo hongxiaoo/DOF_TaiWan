@@ -1,8 +1,10 @@
+# coding=utf-8
 """
 IMG文件操作类模块
 """
 import zlib
 from PNG import *
+
 empty_v2 = b'Neople Img File\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\x00\x00\x00\x00\x00\x00'
 v2IndexType = [0x10, 0x0f, 0x0e]
 v5DDS_Index_Type = [0x12, 0x13, 0x14]
@@ -76,7 +78,7 @@ class Img:
         # V4
         if self.edition == 4:
             palette_count = bytes2int(self.read_(4))
-            palette = self.read_(4*palette_count)
+            palette = self.read_(4 * palette_count)
             self.palette_colors = palette_ana(palette_count, palette)
             # print(self.palette_count)
             # print(self.palette)
@@ -86,7 +88,7 @@ class Img:
             dds_index_count = bytes2int(self.read_(4))
             img_size = bytes2int(self.read_(4))
             palette_count = bytes2int(self.read_(4))
-            palette = self.read_(4*palette_count)
+            palette = self.read_(4 * palette_count)
             dds_index_content = self.read_(28 * dds_index_count)
 
         # V6

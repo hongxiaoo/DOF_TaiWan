@@ -1,3 +1,4 @@
+# coding=utf-8
 """
 IMG内部PNG图片操作类模块
 """

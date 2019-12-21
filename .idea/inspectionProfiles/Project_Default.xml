@@ -14,6 +14,7 @@
       <option name="ignoredIdentifiers">
         <list>
           <option value="img_index" />
+          <option value="str.__xor__" />
         </list>
       </option>
     </inspection_tool>

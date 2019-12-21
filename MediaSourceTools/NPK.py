@@ -1,8 +1,10 @@
+# coding=utf-8
 """
 NPK文件操作类模块
 """
 from IMG import *
 from tqdm import tqdm
+
 
 def _saveImg(imgContent, imgNamePath):
     with open(imgNamePath, 'wb') as imgFile:
@@ -45,7 +47,7 @@ class Npk(object):
             self.data2 = []
             # 如果数量为零，data2为空
             if self.img_count > 0:
-                for i in range(self.img_count):
+                for count in range(self.img_count):
                     self.data2.append(content.read(264))
             self.data3 = content.read(32)
             # data4为img文件内容的列表
@@ -110,7 +112,6 @@ class Npk(object):
         """
         # 判断renameIndex是否存在
         if self.img_count == 0:
-            renameIndex = -1
             print('当前NPK文件Img数量为0，无可改名Img')
         else:
             while renameIndex not in range(self.img_count):
