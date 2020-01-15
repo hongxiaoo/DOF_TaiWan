@@ -4,7 +4,7 @@ NPK文件操作类模块
 """
 from IMG import *
 from tqdm import tqdm
-
+from tool import *
 
 def _saveImg(imgContent, imgNamePath):
     with open(imgNamePath, 'wb') as imgFile:
@@ -63,8 +63,8 @@ class Npk(object):
         """
         self.dataContents = self._dataContents
         try:
-            if flagIndex:
-                with open(self.filePath.replace('.NPK', '-bak.NPK'), 'wb') as newObj:
+            if flagIndex is True:
+                with open(self.filePath.lower().replace('.npk', '-bak.npk'), 'wb') as newObj:
                     newObj.write(self.dataContents)
                 return True
             else:
@@ -290,15 +290,33 @@ class Npk(object):
 
 # 测试代码
 if __name__ == '__main__':
-    for file in list_all_files('D:\\UserData\\Desktop\\test'):
-        if '.NPK' in file:
+    main_dir = GetDesktopPath() + '\\test'
+    with open(main_dir + '\\IMG_name.txt', 'r') as img_name_file:
+        img_name_list = [line.strip() for line in img_name_file.readlines()]
+    for file in list_all_files(main_dir):
+        if file_type(file).lower() == '.npk':
             npkObj = Npk(file)
             print(npkObj.name, "Img数量为：", npkObj.img_count)
-            for i in tqdm(npkObj.imgAnalyse.keys()):
-                img = Img()
-                img.from_npk(npkObj.imgAnalyse[i])
-                try:
-                    img.read_content()
-                    img.save_all_pic()
-                except:
-                    continue
+
+            npkObj._delImg(1)
+            npkObj._saveNpk(flagIndex=True)
+            # 删除img后的序号标识
+            # flag = 0
+            # for i in list(npkObj.imgAnalyse.keys()):
+            #     img_index = i - flag
+            #     img = Img()
+            #     img.from_npk(npkObj.imgAnalyse[img_index])
+            #     if img.name not in img_name_list:
+            #         npkObj._delImg(img_index)
+            #         flag += 1
+            # npkObj._saveNpk()
+
+                # if img.name not in img_name_list:
+                #     with open(main_dir + '\\IMG_name.txt', 'a+') as img_name_file:
+                #         img_name_file.write(img.name + '\n')
+                # img_name_list.append(img.name)
+                # try:
+                #     img.read_content()
+                #     img.save_all_pic()
+                # except:
+                #     continue

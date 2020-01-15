@@ -18,7 +18,7 @@ aic_list = lst2list(main_dir + '\\aicharacter\\aicharacter.lst')
 
 def get_equ_ids(path):
     if os.path.splitext(path)[1] == '.aic':
-        with open(path, 'r+', encoding='utf-8') as f:
+        with open(path, 'r+', encoding='utf-8', errors='ignore') as f:
             content = f.read()
             p = '`(.*)`'
             apc_name = findall(p, content)[0]
@@ -44,7 +44,7 @@ def creak_new_stk_file(stk_id, main_file_path, content):
 not_in_lst_apc = []
 lst_content = ''
 cash_shop_content = ''
-cash_shop = 7237
+cash_shop = 500000
 apc_equipments = []
 
 for file_path in laf(main_dir + '\\aicharacter'):
@@ -104,5 +104,5 @@ with open(main_dir + '\\不在lst中的APC.txt', 'w+') as notinlstapc:
 with open(main_dir + '\\new_stackable.lst', 'w') as stk_new_lst:
     stk_new_lst.write(lst_content)
 
-with open(main_dir + '\\newcashshop.etc', 'w') as cash_new_lst:
+with open(main_dir + '\\newcashshop.etc', 'w', encoding='utf-8') as cash_new_lst:
     cash_new_lst.write(cash_shop_content)

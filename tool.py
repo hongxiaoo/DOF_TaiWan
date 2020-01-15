@@ -164,6 +164,10 @@ def lst_compare(lst1, lst2):
         f.write(different + in1not2 + in2not1)
 
 
+def file_type(path):
+    return os.path.splitext(path)[1]
+
+
 if __name__ == '__main__':
     desktop = GetDesktopPath()
     for file in laf(desktop + '\\equipment'):

@@ -4,6 +4,7 @@ IMG文件操作类模块
 """
 import zlib
 from PNG import *
+from tool import *
 
 empty_v2 = b'Neople Img File\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\x00\x00\x00\x00\x00\x00'
 v2IndexType = [0x10, 0x0f, 0x0e]
@@ -84,7 +85,7 @@ class Img:
             # print(self.palette)
 
         # V5
-        if self.edition == 5:
+        elif self.edition == 5:
             dds_index_count = bytes2int(self.read_(4))
             img_size = bytes2int(self.read_(4))
             palette_count = bytes2int(self.read_(4))
@@ -92,7 +93,7 @@ class Img:
             dds_index_content = self.read_(28 * dds_index_count)
 
         # V6
-        if self.edition == 6:
+        elif self.edition == 6:
             # 读取颜色分类
             palette_type_count = bytes2int(self.read_(4))
             palette_types = {}
@@ -241,8 +242,9 @@ class Img:
 
 
 if __name__ == "__main__":
+    main_dir = GetDesktopPath() + '\\test'
     a = Img()
-    a.from_img('D:\\UserData\\Desktop\\test\\v4.img')
+    a.from_img(main_dir + '\\sm_pants0000a.img')
     a.read_content()
     print(a.header, '\n',
           a.index_contents_size, '\n',
